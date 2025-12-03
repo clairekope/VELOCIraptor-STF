@@ -141,6 +141,9 @@ static void log_options_summary(const Options &opt)
         case IOHDF:
             input_type = "HDF";
             break;
+        case IOENZO:
+            input_type = "Enzo";
+            break;
 #endif
 #ifdef USEXDR
         case IONCHILADA:
@@ -212,7 +215,7 @@ void GetArgs(int argc, char *argv[], Options &opt)
                 NumArgs += 2;
                 break;
             case 't':
-                opt.ramsessnapname = optarg;
+                opt.snapname = optarg;  // used for RAMSES & Enzo
                 NumArgs += 2;
                 break;
             case '?':
@@ -243,17 +246,18 @@ void usage(void)
     cerr<<"USAGE:\n";
     cerr<<"\n";
     cerr<<"-C <configuration file (overrides other options)> "<<endl;
-    cerr<<"-I <input format [Gadget (Default) "<<IOGADGET<<", HDF (if implemented) "<<IOHDF<<", TIPSY "<<IOTIPSY<<", RAMSES "<<IORAMSES<<", NCHILADA "<<IONCHILADA<<">"<<endl;
-    cerr<<"-i <input file> "<<endl;
-    cerr<<"-s <number of files per output for gadget input 1 [default]>"<<endl;
+    cerr<<"-I <input format [Gadget (Default) "<<IOGADGET<<", HDF (if implemented) "<<IOHDF;
+    cerr<<", TIPSY "<<IOTIPSY<<", RAMSES "<<IORAMSES<<", NCHILADA "<<IONCHILADA<<", Enzo (requires HDF5)"<<IOENZO<<"]>"<<endl;
+    cerr<<"-i <path to input> "<<endl;
+    cerr<<"-s <number of files per output>"<<endl;
     cerr<<"-Z <number of threads used in parallel read ("<<opt.nsnapread<<")>"<<endl;
     cerr<<"-o <output filename>"<<endl;
     cerr<<" ===== EXTRA OPTIONS FOR GADGET INPUT ====== "<<endl;
     cerr<<"-g <number of extra sph/gas blocks for gadget>"<<endl;
     cerr<<"-s <number of extra star blocks for gadget>"<<endl;
     cerr<<"-b <number of extra bh blocks for gadget>"<<endl;
-    cerr<<" ===== EXTRA OPTIONS REQUIRED FOR RAMSES INPUT ====== "<<endl;
-    cerr<<"-t <ramses snapnumber>"<<endl;
+    cerr<<" ===== EXTRA OPTIONS REQUIRED FOR RAMSES & ENZO INPUT ====== "<<endl;
+    cerr<<"-t <RAMSES/Enzo snapshot number/name>"<<endl;
 
     }
 #ifdef USEMPI

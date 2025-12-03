@@ -44,6 +44,8 @@ void ReadTipsy(Options &opt, vector<Particle> &Part, const Int_t nbodies,Particl
 #ifdef USEHDF
 ///Read HDF format
 void ReadHDF(Options &opt, vector<Particle> &Part, const Int_t nbodies,Particle *&Pbaryons, Int_t nbaryons=0);
+///Read Enzo format
+void ReadEnzo(Options &opt, vector<Particle> &Part, const Int_t nbodies,Particle *&Pbaryons, Int_t nbaryons=0);
 #endif
 ///Read ramses file
 void ReadRamses(Options &opt, vector<Particle> &Part, const Int_t nbodies,Particle *&Pbaryons, Int_t nbaryons=0);
@@ -553,6 +555,10 @@ void MPIDomainDecompositionRAMSES(Options &opt);
 void MPIDomainExtentHDF(Options &opt);
 ///Determine Domain for Gadget input
 void MPIDomainDecompositionHDF(Options &opt);
+///Determine Domain Extent for Enzo input
+void MPIDomainExtentEnzo(Options &opt);
+///Determine Domaine for Enzo input
+void MPIDomainDecompositionEnzo(Options &opt);
 #endif
 
 ///Determine Domain Extent for Nchilada input
@@ -586,6 +592,8 @@ void MPINumInDomainRAMSES(Options &opt);
 #ifdef USEHDF
 /// Determine number of local particles for HDF
 void MPINumInDomainHDF(Options &opt);
+/// Determine number of local particles for Enzo
+void MPINumInDomainEnzo(Options &opt);
 #endif
 /// Determine number of local particles for Nchilada
 void MPINumInDomainNchilada(Options &opt);

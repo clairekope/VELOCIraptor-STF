@@ -461,6 +461,7 @@ void MPINumInDomain(Options &opt)
     else if (opt.inputtype==IORAMSES) MPINumInDomainRAMSES(opt);
 #ifdef USEHDF
     else if (opt.inputtype==IOHDF) MPINumInDomainHDF(opt);
+    else if (opt.inputtype==IOENZO) MPINumInDomainEnzo(opt);
 #endif
     if (ThisTask == 0) {
         if (Ntotal/1e7 < NProcs) {
@@ -477,6 +478,7 @@ void MPINumInDomain(Options &opt)
             else if (opt.inputtype==IORAMSES) MPINumInDomainRAMSES(opt);
 #ifdef USEHDF
             else if (opt.inputtype==IOHDF) MPINumInDomainHDF(opt);
+            else if (opt.inputtype==IOENZO) MPINumInDomainEnzo(opt);
 #endif
         }
     }
@@ -494,6 +496,7 @@ void MPIDomainExtent(Options &opt)
     else if (opt.inputtype==IORAMSES) MPIDomainExtentRAMSES(opt);
 #ifdef USEHDF
     else if (opt.inputtype==IOHDF) MPIDomainExtentHDF(opt);
+    else if (opt.inputtype==IOENZO) MPIDomainExtentEnzo(opt);
 #endif
 }
 
@@ -505,6 +508,7 @@ void MPIDomainDecomposition(Options &opt)
     else if (opt.inputtype==IORAMSES) MPIDomainDecompositionRAMSES(opt);
 #ifdef USEHDF
     else if (opt.inputtype==IOHDF) MPIDomainDecompositionHDF(opt);
+    else if (opt.inputtype==IOENZO) MPIDomainDecompositionEnzo(opt);
 #endif
 }
 

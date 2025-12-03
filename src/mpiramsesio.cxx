@@ -46,7 +46,7 @@ void MPIDomainExtentRAMSES(Options &opt){
     RAMSES_Header ramses_header_info;
     string stringbuf;
     if (ThisTask==0) {
-    sprintf(buf,"%s/info_%s.txt",opt.fname,opt.ramsessnapname);
+    sprintf(buf,"%s/info_%s.txt",opt.fname,opt.snapname);
     Framses.open(buf, ios::in);
     getline(Framses,stringbuf);
     getline(Framses,stringbuf);
@@ -154,7 +154,7 @@ void MPINumInDomainRAMSES(Options &opt)
         // Compute Mass of DM particles in RAMSES code units
         //
         fstream Finfo;
-        sprintf(buf1,"%s/info_%s.txt", opt.fname, opt.ramsessnapname);
+        sprintf(buf1,"%s/info_%s.txt", opt.fname, opt.snapname);
         Finfo.open(buf1, ios::in);
         getline(Finfo,stringbuf);//nfiles
         getline(Finfo,stringbuf);//ndim
@@ -180,8 +180,8 @@ void MPINumInDomainRAMSES(Options &opt)
     if (ireadtask[ThisTask]>=0) {
         if (opt.partsearchtype!=PSTGAS) {
             for (int i = 0, count2 = 0; i < opt.num_files; i++) if (ireadfile[i]){
-                sprintf(buf1,"%s/part_%s.out%05d",opt.fname,opt.ramsessnapname,static_cast<int>(i+1));
-                sprintf(buf2,"%s/part_%s.out",opt.fname,opt.ramsessnapname);
+                sprintf(buf1,"%s/part_%s.out%05d",opt.fname,opt.snapname,static_cast<int>(i+1));
+                sprintf(buf2,"%s/part_%s.out",opt.fname,opt.snapname);
                 if (FileExists(buf1)) sprintf(buf,"%s",buf1);
                 else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
                 Fpart[i].open      (buf, ios::binary|ios::in);
@@ -306,13 +306,13 @@ void MPINumInDomainRAMSES(Options &opt)
         // now process gas if necessary
         if (opt.partsearchtype==PSTGAS || opt.partsearchtype==PSTALL) {
             for (i=0;i<opt.num_files;i++) if (ireadfile[i]) {
-                sprintf(buf1,"%s/amr_%s.out%05d",opt.fname,opt.ramsessnapname,static_cast<int>(i+1));
-                sprintf(buf2,"%s/amr_%s.out",opt.fname,opt.ramsessnapname);
+                sprintf(buf1,"%s/amr_%s.out%05d",opt.fname,opt.snapname,static_cast<int>(i+1));
+                sprintf(buf2,"%s/amr_%s.out",opt.fname,opt.snapname);
                 if (FileExists(buf1)) sprintf(buf,"%s",buf1);
                 else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
                 Famr[i].open(buf, ios::binary|ios::in);
-                sprintf(buf1,"%s/hydro_%s.out%05d",opt.fname,opt.ramsessnapname,static_cast<int>(i+1));
-                sprintf(buf2,"%s/hydro_%s.out",opt.fname,opt.ramsessnapname);
+                sprintf(buf1,"%s/hydro_%s.out%05d",opt.fname,opt.snapname,static_cast<int>(i+1));
+                sprintf(buf2,"%s/hydro_%s.out",opt.fname,opt.snapname);
                 if (FileExists(buf1)) sprintf(buf,"%s",buf1);
                 else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
                 Fhydro[i].open(buf, ios::binary|ios::in);

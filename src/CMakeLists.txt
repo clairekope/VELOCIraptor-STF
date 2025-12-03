@@ -15,6 +15,7 @@ set(VR_SOURCES
     buildandsortarrays.cxx
     "${compilation_info_cxx}"
     endianutils.cxx
+    enzoio.cxx
     fofalgo.cxx
     gadgetio.cxx
     "${git_revision_cxx}"
@@ -26,6 +27,7 @@ set(VR_SOURCES
     localbgcomp.cxx
     localfield.cxx
     logging.cxx
+    mpienzoio.cxx
     mpigadgetio.cxx
     mpihdfio.cxx
     mpinchiladaio.cxx

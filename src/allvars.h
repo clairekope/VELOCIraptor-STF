@@ -202,6 +202,7 @@ using namespace NBody;
 #define  IOTIPSY 3
 #define  IORAMSES 4
 #define  IONCHILADA 5
+#define  IOENZO 6
 //@}
 
 
@@ -440,7 +441,7 @@ struct Options
     char *smname = nullptr;
     char* pname = nullptr;
     char* gname = nullptr;
-    char *ramsessnapname = nullptr;
+    char *snapname = nullptr;
     //@}
     ///input format
     int inputtype = IOGADGET;

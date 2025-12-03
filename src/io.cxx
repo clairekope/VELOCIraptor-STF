@@ -17,6 +17,7 @@
 #include "endianutils.h"
 #ifdef USEHDF
 #include "hdfitems.h"
+#include "enzoitems.h"
 #endif
 #include "ramsesitems.h"
 #ifdef USEXDR
@@ -84,6 +85,7 @@ Int_t ReadHeader(Options &opt){
     else if (opt.inputtype==IORAMSES) return RAMSES_get_nbodies(opt.fname,opt.partsearchtype,opt);
 #ifdef USEHDF
     else if (opt.inputtype==IOHDF) return HDF_get_nbodies(opt.fname,opt.partsearchtype,opt);
+    else if (opt.inputtype==IOENZO) return Enzo_get_nbodies(opt.fname,opt.partsearchtype,opt);
 #endif
 #ifdef USEXDR
     else if (opt.inputtype==IONCHILADA) return Nchilada_get_nbodies(opt.fname,opt.partsearchtype,opt);
@@ -115,6 +117,7 @@ void ReadData(Options &opt, vector<Particle> &Part, const Int_t nbodies, Particl
     else if (opt.inputtype==IORAMSES) ReadRamses(opt,Part,nbodies, Pbaryons, nbaryons);
 #ifdef USEHDF
     else if (opt.inputtype==IOHDF) ReadHDF(opt,Part,nbodies, Pbaryons, nbaryons);
+    else if (opt.inputtype==IOENZO) ReadEnzo(opt,Part,nbodies, Pbaryons, nbaryons);
 #endif
 #ifdef USEXDR
     else if (opt.inputtype==IONCHILADA) ReadNchilada(opt,Part,nbodies, Pbaryons, nbaryons);

@@ -89,8 +89,8 @@ Int_t RAMSES_get_nbodies(char *fname, int ptype, Options &opt)
     int alltotal   = 0;
     int ghoststars = 0;
     string stringbuf;
-    sprintf(buf1,"%s/amr_%s.out00001",fname,opt.ramsessnapname);
-    sprintf(buf2,"%s/amr_%s.out",fname,opt.ramsessnapname);
+    sprintf(buf1,"%s/amr_%s.out00001",fname,opt.snapname);
+    sprintf(buf2,"%s/amr_%s.out",fname,opt.snapname);
     if (FileExists(buf1)) sprintf(buf,"%s",buf1);
     else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
     else {
@@ -99,8 +99,8 @@ Int_t RAMSES_get_nbodies(char *fname, int ptype, Options &opt)
     }
     //if gas searched in some fashion then load amr/hydro data
     if (opt.partsearchtype==PSTGAS||opt.partsearchtype==PSTALL||(opt.partsearchtype==PSTDARK&&opt.iBaryonSearch)) {
-    sprintf(buf1,"%s/hydro_%s.out00001",fname,opt.ramsessnapname);
-    sprintf(buf2,"%s/hydro_%s.out",fname,opt.ramsessnapname);
+    sprintf(buf1,"%s/hydro_%s.out00001",fname,opt.snapname);
+    sprintf(buf2,"%s/hydro_%s.out",fname,opt.snapname);
     if (FileExists(buf1)) sprintf(buf,"%s",buf1);
     else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
     else {
@@ -108,8 +108,8 @@ Int_t RAMSES_get_nbodies(char *fname, int ptype, Options &opt)
         exit(9);
     }
     }
-    sprintf(buf1,"%s/part_%s.out00001",fname,opt.ramsessnapname);
-    sprintf(buf2,"%s/part_%s.out",fname,opt.ramsessnapname);
+    sprintf(buf1,"%s/part_%s.out00001",fname,opt.snapname);
+    sprintf(buf2,"%s/part_%s.out",fname,opt.snapname);
     if (FileExists(buf1)) sprintf(buf,"%s",buf1);
     else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
     else {
@@ -137,8 +137,8 @@ Int_t RAMSES_get_nbodies(char *fname, int ptype, Options &opt)
 
     //Open the specified file and the specified dataset in the file.
     //first open amr data
-    sprintf(buf1,"%s/amr_%s.out00001",fname,opt.ramsessnapname);
-    sprintf(buf2,"%s/amr_%s.out",fname,opt.ramsessnapname);
+    sprintf(buf1,"%s/amr_%s.out00001",fname,opt.snapname);
+    sprintf(buf2,"%s/amr_%s.out",fname,opt.snapname);
     if (FileExists(buf1)) sprintf(buf,"%s",buf1);
     else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
     Framses.open(buf, ios::binary|ios::in);
@@ -226,8 +226,8 @@ Int_t RAMSES_get_nbodies(char *fname, int ptype, Options &opt)
     //reopen to get number of amr cells might need to alter to read grid information and what cells have no so-called son cells
     if (opt.partsearchtype==PSTGAS||opt.partsearchtype==PSTALL||(opt.partsearchtype==PSTDARK&&opt.iBaryonSearch)) {
     for (i=0;i<ramses_header_info.num_files;i++) {
-        sprintf(buf1,"%s/amr_%s.out%05d",fname,opt.ramsessnapname,i+1);
-        sprintf(buf2,"%s/amr_%s.out",fname,opt.ramsessnapname);
+        sprintf(buf1,"%s/amr_%s.out%05d",fname,opt.snapname,i+1);
+        sprintf(buf2,"%s/amr_%s.out",fname,opt.snapname);
         if (FileExists(buf1)) sprintf(buf,"%s",buf1);
         else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
         Framses.open(buf, ios::binary|ios::in);
@@ -243,8 +243,8 @@ Int_t RAMSES_get_nbodies(char *fname, int ptype, Options &opt)
     }
 
     //now hydro header data
-    sprintf(buf1,"%s/hydro_%s.out00001",fname,opt.ramsessnapname);
-    sprintf(buf2,"%s/hydro_%s.out",fname,opt.ramsessnapname);
+    sprintf(buf1,"%s/hydro_%s.out00001",fname,opt.snapname);
+    sprintf(buf2,"%s/hydro_%s.out",fname,opt.snapname);
     if (FileExists(buf1)) sprintf(buf,"%s",buf1);
     else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
     Framses.open(buf, ios::binary|ios::in);
@@ -272,7 +272,7 @@ Int_t RAMSES_get_nbodies(char *fname, int ptype, Options &opt)
     // Compute Mass of DM particles in RAMSES code units
     //
     fstream Finfo;
-    sprintf(buf1,"%s/info_%s.txt", fname,opt.ramsessnapname);
+    sprintf(buf1,"%s/info_%s.txt", fname,opt.snapname);
     Finfo.open(buf1, ios::in);
     Finfo>>stringbuf>>stringbuf>>opt.num_files;
     getline(Finfo,stringbuf);//ndim
@@ -296,8 +296,8 @@ Int_t RAMSES_get_nbodies(char *fname, int ptype, Options &opt)
     //now particle info
     for (i=0;i<ramses_header_info.num_files;i++)
     {
-        sprintf(buf1,"%s/part_%s.out%05d",fname,opt.ramsessnapname,i+1);
-        sprintf(buf2,"%s/part_%s.out",fname,opt.ramsessnapname);
+        sprintf(buf1,"%s/part_%s.out%05d",fname,opt.snapname,i+1);
+        sprintf(buf2,"%s/part_%s.out",fname,opt.snapname);
         if (FileExists(buf1)) sprintf(buf,"%s",buf1);
         else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
         Framses.open(buf, ios::binary|ios::in);
@@ -539,7 +539,7 @@ void ReadRamses(Options &opt, vector<Particle> &Part, const Int_t nbodies, Parti
 #endif
 
     //first read cosmological information
-    sprintf(buf1,"%s/info_%s.txt",opt.fname,opt.ramsessnapname);
+    sprintf(buf1,"%s/info_%s.txt",opt.fname,opt.snapname);
     Finfo.open(buf1, ios::in);
     getline(Finfo,stringbuf);//nfiles
     getline(Finfo,stringbuf);//ndim
@@ -628,7 +628,7 @@ void ReadRamses(Options &opt, vector<Particle> &Part, const Int_t nbodies, Parti
     opt.ellxscale = LN;
 
     //grab from the first particle file the dimensions of the arrays and also the number of cpus (should be number of files)
-    sprintf(buf1,"%s/part_%s.out00001",opt.fname,opt.ramsessnapname);
+    sprintf(buf1,"%s/part_%s.out00001",opt.fname,opt.snapname);
     Fpart[ifirstfile].open(buf1, ios::binary|ios::in);
     RAMSES_fortran_read(Fpart[ifirstfile],header[ifirstfile].nfiles);
     RAMSES_fortran_read(Fpart[ifirstfile],header[ifirstfile].ndim);
@@ -659,8 +659,8 @@ void ReadRamses(Options &opt, vector<Particle> &Part, const Int_t nbodies, Parti
     //read particle files consists of positions,velocities, mass, id, and level (along with ages and met if some flags set)
     for (i=0;i<opt.num_files;i++) {
     if (ireadfile[i]) {
-        sprintf(buf1,"%s/part_%s.out%05d",opt.fname,opt.ramsessnapname,i+1);
-        sprintf(buf2,"%s/part_%s.out",opt.fname,opt.ramsessnapname);
+        sprintf(buf1,"%s/part_%s.out%05d",opt.fname,opt.snapname,i+1);
+        sprintf(buf2,"%s/part_%s.out",opt.fname,opt.snapname);
         if (FileExists(buf1)) sprintf(buf,"%s",buf1);
         else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
         Fpart[i].open(buf, ios::binary|ios::in);
@@ -1022,13 +1022,13 @@ void ReadRamses(Options &opt, vector<Particle> &Part, const Int_t nbodies, Parti
     inreadsend=0;
 #endif
     for (i=0;i<opt.num_files;i++) if (ireadfile[i]) {
-        sprintf(buf1,"%s/amr_%s.out%05d",opt.fname,opt.ramsessnapname,i+1);
-        sprintf(buf2,"%s/amr_%s.out",opt.fname,opt.ramsessnapname);
+        sprintf(buf1,"%s/amr_%s.out%05d",opt.fname,opt.snapname,i+1);
+        sprintf(buf2,"%s/amr_%s.out",opt.fname,opt.snapname);
         if (FileExists(buf1)) sprintf(buf,"%s",buf1);
         else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
         Famr[i].open(buf, ios::binary|ios::in);
-        sprintf(buf1,"%s/hydro_%s.out%05d",opt.fname,opt.ramsessnapname,i+1);
-        sprintf(buf2,"%s/hydro_%s.out",opt.fname,opt.ramsessnapname);
+        sprintf(buf1,"%s/hydro_%s.out%05d",opt.fname,opt.snapname,i+1);
+        sprintf(buf2,"%s/hydro_%s.out",opt.fname,opt.snapname);
         if (FileExists(buf1)) sprintf(buf,"%s",buf1);
         else if (FileExists(buf2)) sprintf(buf,"%s",buf2);
         Fhydro[i].open(buf, ios::binary|ios::in);
